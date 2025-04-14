@@ -42,26 +42,28 @@
                     <h5>Description:</h5>
                     <p>[[*{description}]]</p>
                   </div>
-                  <div class="col-3 text-end"> 
-                    <h5 class="badge fs-6 bg-secondary">[[*{price}]] &#8364;</h5>
+                  <div class="col-3 text-end">
+                    <h5 class="badge fs-6 bg-secondary">
+                      [[*{price}]] &#8364;
+                    </h5>
                   </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end gap-2">
-                  <div>
+                  <div sec:authorize="hasAuthority('ADMIN')">
                     <a
                       th:href="@{/pizzas/{id}/offer(id = *{id})}"
                       class="btn btn-sm btn-outline-secondary"
                       >Add Offer</a
                     >
                   </div>
-                  <div>
+                  <div sec:authorize="hasAuthority('ADMIN')">
                     <a
                       th:href="@{/pizzas/edit/{id}(id = *{id})}"
                       class="btn btn-sm btn-secondary"
                       >&#9998;</a
                     >
                   </div>
-                  <div>
+                  <div sec:authorize="hasAuthority('ADMIN')">
                     <th:block
                       th:replace="~{fragments/fragments :: deleteModal}"
                     />
@@ -79,8 +81,8 @@
                   <th scope="col">Offer</th>
                   <th scope="col">Starting date</th>
                   <th scope="col">Ending date</th>
-                  <th></th>
-                  <th></th>
+                  <th sec:authorize="hasAuthority('ADMIN')"></th>
+                  <th sec:authorize="hasAuthority('ADMIN')"></th>
                 </tr>
               </thead>
               <tbody>
@@ -88,14 +90,14 @@
                   <td>[[*{title}]]</td>
                   <td>[[*{startDate}]]</td>
                   <td>[[*{endDate}]]</td>
-                  <td>
+                  <td sec:authorize="hasAuthority('ADMIN')">
                     <a
                       th:href="@{/offers/edit/{id}(id = *{id})}"
                       class="btn btn-sm btn-secondary"
                       >&#9998;</a
                     >
                   </td>
-                  <td>
+                  <td sec:authorize="hasAuthority('ADMIN')">
                     <th:block
                       th:replace="~{fragments/fragments :: deleteOfferModal}"
                     />

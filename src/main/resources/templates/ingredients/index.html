@@ -27,7 +27,7 @@
           </form>
           
           <div>
-            <a class="btn btn-dark" th:href="@{/ingredients/create}">Add new ingredient</a>
+            <a class="btn btn-dark" th:href="@{/ingredients/create}" sec:authorize="hasAuthority('ADMIN')">Add new ingredient</a>
           </div>
         </div>
 
@@ -41,8 +41,8 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Pizzas</th>
-                <th></th>
-                <th></th>
+                <th sec:authorize="hasAuthority('ADMIN')"></th>
+                <th sec:authorize="hasAuthority('ADMIN')"></th>
               </tr>
             </thead>
             <tbody>
@@ -50,8 +50,8 @@
                   <th scope="row">[[*{id}]]</th>
                   <td>[[*{name}]]</td>
                   <td>[[*{pizzas.size()}]]</td>
-                  <td><a th:href="@{/ingredients/edit/{id}(id = *{id})}" class="btn btn-sm btn-secondary">&#9998;</a></td>
-                  <td>   
+                  <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/ingredients/edit/{id}(id = *{id})}" class="btn btn-sm btn-secondary">&#9998;</a></td>
+                  <td sec:authorize="hasAuthority('ADMIN')">   
                    <th:block th:replace="~{fragments/fragments :: deleteIngredientModal}"></th:block>
                   </td>
                 </tr>

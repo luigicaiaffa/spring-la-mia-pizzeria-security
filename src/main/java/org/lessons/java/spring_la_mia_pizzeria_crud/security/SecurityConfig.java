@@ -32,16 +32,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @SuppressWarnings("deprecation")
-    DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
-        // authProvider.setUserDetailsService();
-        authProvider.setPasswordEncoder(passwordEncoder());
-
-        return authProvider;
-    }
-
     @Bean
     DatabaseUserDetailService userDetailService() {
         return new DatabaseUserDetailService();
@@ -52,4 +42,14 @@ public class SecurityConfig {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
+    @Bean
+    @SuppressWarnings("deprecation")
+    DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+
+        authProvider.setUserDetailsService(userDetailService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+
+        return authProvider;
+    }
 }

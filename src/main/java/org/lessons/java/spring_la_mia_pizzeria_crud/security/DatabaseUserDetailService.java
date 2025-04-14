@@ -14,16 +14,15 @@ public class DatabaseUserDetailService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> userAttempt = userRepository.findByUsername(username);
 
         if (userAttempt.isEmpty()) {
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("User not found with username: " + username);
         }
         
-        return "";
+        return new DatabaseUserDetails(userAttempt.get());
     }
     
 }

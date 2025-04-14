@@ -43,6 +43,11 @@ public class SecurityConfig {
     }
 
     @Bean
+    DatabaseUserDetailService userDetailService() {
+        return new DatabaseUserDetailService();
+    }
+
+    @Bean
     PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
